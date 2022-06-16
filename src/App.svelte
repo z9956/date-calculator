@@ -15,7 +15,7 @@
         hour: 0
     }
 
-    let diffResult = null
+    let diffResult = null;
 
     const handleDiff = () => {
         const day = dayjs(`${lastDate.year}-${lastDate.month}-${lastDate.day}`).diff(dayjs(`${preDate.year}-${preDate.month}-${preDate.day}`), 'day');
@@ -26,7 +26,8 @@
     let calculationResult = null;
     let status = 'add';
     let unit = 'day';
-    let num = 0;
+    let unitLabel = '天';
+    let num = 3;
     const calculationDate = dayjs();
     const calculation = {
         year: calculationDate.year(),
@@ -48,6 +49,10 @@
 
     const handleChangeUnit = ({target: {value}}) => {
         unit = value;
+
+        if (unit) {
+            unitLabel = unitOptions.find(item => item.value === unit).label;
+        }
     }
 
     const options = [
@@ -106,7 +111,7 @@
     </div>
 
     <div class="select-date">
-        <h4>推算几天后的日期</h4>
+        <h4>推算几{unitLabel}后的日期</h4>
         <p>
             <input bind:value={calculation.year} type="number">年
             <input bind:value={calculation.month} type="number">月
