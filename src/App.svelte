@@ -18,9 +18,14 @@
     let diffResult = null;
 
     const handleDiff = () => {
-        const day = dayjs(`${lastDate.year}-${lastDate.month}-${lastDate.day}`).diff(dayjs(`${preDate.year}-${preDate.month}-${preDate.day}`), 'day');
+        const date = dayjs(`${lastDate.year}-${lastDate.month}-${lastDate.day}`);
 
-        diffResult = `${day}天 = ${day * 24}小时`;
+        const day = date.diff(`${preDate.year}-${preDate.month}-${preDate.day}`, 'day');
+        const week = date.diff(`${preDate.year}-${preDate.month}-${preDate.day}`, 'week');
+        const month = date.diff(`${preDate.year}-${preDate.month}-${preDate.day}`, 'month');
+        const year = date.diff(`${preDate.year}-${preDate.month}-${preDate.day}`, 'year');
+
+        diffResult = `${year}年 = ${month}月 = ${week}周 = ${day}天 = ${day * 24}小时`;
     }
 
     let calculationResult = null;
@@ -67,6 +72,10 @@
         },
     ]
     const unitOptions = [
+        {
+            value: 'hours',
+            label: '小时'
+        },
         {
             value: 'day',
             label: '天'
@@ -125,7 +134,7 @@
                 {/each}
             </select>
             <input bind:value={num} type="number">
-            <select on:change={handleChangeUnit}>
+            <select on:change={handleChangeUnit} bind:value={unit}>
                 {#each unitOptions as option}
                     <option value={option.value}>{option.label}</option>
                 {/each}
