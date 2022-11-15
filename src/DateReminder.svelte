@@ -1,8 +1,10 @@
 <script>
     import { onMount } from 'svelte';
 
-    import { Lunar } from 'lunar-javascript';
+    import { Lunar, Solar } from 'lunar-javascript';
 
+    const date = new Date();
+    let toSolar = true;
     let reminderDate = [
         {
             month: 3,
@@ -26,10 +28,38 @@
         }
     ];
 
+    const targetDate = {
+        year: date.getFullYear(),
+        month: date.getMonth() + 1,
+        day: date.getDate(),
+        solar: null,
+        lunar: null,
+        constellation: null
+    }
+
+    const handleLunarToSolar = () => {
+        toSolar = true;
+
+        const lunar = Lunar.fromYmd(targetDate.year, targetDate.month, targetDate.day);
+        const solar = lunar.getSolar();
+
+        targetDate.lunar = lunar;
+        targetDate.solar = solar.toString();
+        targetDate.constellation = solar.getXingZuo();
+    }
+
+    const handleSolarToLunar = () => {
+        toSolar = false;
+        const solar = Solar.fromDate(new Date(`${targetDate.year}-${targetDate.month}-${targetDate.day}`));
+
+        targetDate.lunar = solar.getLunar().toString();
+        targetDate.solar = solar.toString();
+    }
+
     onMount(() => {
         reminderDate = reminderDate.map(current => {
             const {month, day} = current;
-            const year = new Date().getFullYear();
+            const year = date.getFullYear();
             const lunar = Lunar.fromYmd(year, month, day);
             const solar = lunar.getSolar();
 
@@ -48,8 +78,35 @@
             <p>农历 {reminder.lunar ?? ''} -> 阳历 {reminder.solar ?? ''}</p>
         {/each}
     </div>
+    <h3>农历 ⇄ 阳历</h3>
+    <div class="select-date">
+        <p>
+            <input bind:value={targetDate.year} type="number">年
+            <input bind:value={targetDate.month} type="number">月
+            <input bind:value={targetDate.day} type="number">日
+        </p>
+        <p>
+            <button on:click={handleLunarToSolar}>转阳历</button>
+            <button on:click={handleSolarToLunar}>转农历</button>
+        </p>
+
+        {#if (toSolar)}
+            <p>农历 {targetDate.lunar ?? ''} -> 阳历 {`${targetDate.solar ?? ''} ${targetDate.constellation ?? ''}`}</p>
+            {:else}
+            <p>阳历 {`${targetDate.solar ?? ''}`} ->  农历 {targetDate.lunar ?? ''}</p>
+        {/if}
+    </div>
 </main>
 
 <style>
+    .select-date input {
+        width: 60px;
+        height: 30px;
+        font-size: 16px;
+    }
 
+    button {
+        width: 60px;
+        height: 30px;
+    }
 </style>
