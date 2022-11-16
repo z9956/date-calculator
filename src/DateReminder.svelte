@@ -57,15 +57,17 @@
     }
 
     onMount(() => {
+        const now = date.getTime();
+
         reminderDate = reminderDate.map(current => {
-            const {month, day} = current;
+            const { month, day } = current;
             const year = date.getFullYear();
             const lunar = Lunar.fromYmd(year, month, day);
             const solar = lunar.getSolar();
 
             current.solar = solar.toString();
             current.lunar = lunar;
-
+            current.expire = now > new Date(current.solar).getTime();
             return current
         })
     })
@@ -75,7 +77,12 @@
     <h3>日期提醒</h3>
     <div>
         {#each reminderDate as reminder}
-            <p>农历 {reminder.lunar ?? ''} -> 阳历 {reminder.solar ?? ''}</p>
+            {#if (reminder.expire)}
+                <p><del>农历 {reminder.lunar ?? ''} -> 阳历 {reminder.solar ?? ''}</del></p>
+                {:else}
+                <p>农历 {reminder.lunar ?? ''} -> 阳历 {reminder.solar ?? ''}</p>
+
+            {/if}
         {/each}
     </div>
     <h3>农历 ⇄ 阳历</h3>
