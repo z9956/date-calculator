@@ -20,5 +20,6 @@
     .wrap {
         display: flex;
         justify-content: space-around;
+        margin: 0 auto;
     }
 </style>

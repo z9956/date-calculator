@@ -81,9 +81,9 @@
     <h3>农历 ⇄ 阳历</h3>
     <div class="select-date">
         <p>
-            <input bind:value={targetDate.year} type="number">年
-            <input bind:value={targetDate.month} type="number">月
-            <input bind:value={targetDate.day} type="number">日
+            <input bind:value={targetDate.year} type="number"> 年
+            <input bind:value={targetDate.month} type="number"> 月
+            <input bind:value={targetDate.day} type="number"> 日
         </p>
         <p>
             <button on:click={handleLunarToSolar}>转阳历</button>
@@ -99,6 +99,10 @@
 </main>
 
 <style>
+    main {
+        width: 40%;
+    }
+
     .select-date input {
         width: 60px;
         height: 30px;
@@ -108,5 +112,6 @@
     button {
         width: 60px;
         height: 30px;
+        cursor: pointer;
     }
 </style>
