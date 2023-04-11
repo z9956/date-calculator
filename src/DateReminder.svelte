@@ -54,6 +54,7 @@
 
         targetDate.lunar = solar.getLunar().toString();
         targetDate.solar = solar.toString();
+        targetDate.constellation = solar.getXingZuo();
     }
 
     onMount(() => {
@@ -100,7 +101,7 @@
         {#if (toSolar)}
             <p>农历 {targetDate.lunar ?? ''} -> 阳历 {`${targetDate.solar ?? ''} ${targetDate.constellation ?? ''}`}</p>
             {:else}
-            <p>阳历 {`${targetDate.solar ?? ''}`} ->  农历 {targetDate.lunar ?? ''}</p>
+            <p>阳历 {`${targetDate.solar ?? ''} ${targetDate.constellation ?? ''}`} ->  农历 {targetDate.lunar ?? ''}</p>
         {/if}
     </div>
 </main>
@@ -117,7 +118,7 @@
     }
 
     button {
-        width: 60px;
+        min-width: 60px;
         height: 30px;
         cursor: pointer;
     }
