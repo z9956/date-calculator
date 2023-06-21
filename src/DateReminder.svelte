@@ -75,7 +75,7 @@
 </script>
 
 <main>
-    <h3>日期提醒</h3>
+    <h3>日期</h3>
     <div>
         {#each reminderDate as reminder}
             {#if (reminder.expire)}
