@@ -17,13 +17,19 @@
 
     let diffResult = null;
 
+    const toFixed = (num) => {
+        if (Number.isInteger(num)) return num;
+
+        return num.toFixed(1);
+    }
+
     const handleDiff = () => {
         const date = dayjs(`${lastDate.year}-${lastDate.month}-${lastDate.day}`);
 
-        const day = date.diff(`${preDate.year}-${preDate.month}-${preDate.day}`, 'day');
-        const week = date.diff(`${preDate.year}-${preDate.month}-${preDate.day}`, 'week');
-        const month = date.diff(`${preDate.year}-${preDate.month}-${preDate.day}`, 'month');
-        const year = date.diff(`${preDate.year}-${preDate.month}-${preDate.day}`, 'year');
+        const day = toFixed(date.diff(`${preDate.year}-${preDate.month}-${preDate.day}`, 'day', true));
+        const week = toFixed(date.diff(`${preDate.year}-${preDate.month}-${preDate.day}`, 'week', true));
+        const month = toFixed(date.diff(`${preDate.year}-${preDate.month}-${preDate.day}`, 'month', true));
+        const year = toFixed(date.diff(`${preDate.year}-${preDate.month}-${preDate.day}`, 'year', true));
 
         diffResult = `${year}年 = ${month}月 = ${week}周 = ${day}天 = ${day * 24}小时`;
     }
