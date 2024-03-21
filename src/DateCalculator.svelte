@@ -106,14 +106,14 @@
     <div class="select-date">
         <h4>计算两个日期之间相差多少天</h4>
         <p>
-            <input bind:value={preDate.year} type="number"> 年
-            <input bind:value={preDate.month} type="number"> 月
-            <input bind:value={preDate.day} type="number"> 日
+            <input min="0" bind:value={preDate.year} type="number"> 年
+            <input min="0" max="12" bind:value={preDate.month} type="number"> 月
+            <input min="0" max="31" bind:value={preDate.day} type="number"> 日
         </p>
         <p>
-            <input bind:value={lastDate.year} type="number"> 年
-            <input bind:value={lastDate.month} type="number"> 月
-            <input bind:value={lastDate.day} type="number"> 日
+            <input min="0" bind:value={lastDate.year} type="number"> 年
+            <input min="0" max="12" bind:value={lastDate.month} type="number"> 月
+            <input min="0" max="31" bind:value={lastDate.day} type="number"> 日
         </p>
         <p>
             <button on:click={handleDiff}>相差</button>
@@ -128,10 +128,10 @@
     <div class="select-date">
         <h4>推算几{unitLabel}后的日期</h4>
         <p>
-            <input bind:value={calculation.year} type="number"> 年
-            <input bind:value={calculation.month} type="number"> 月
-            <input bind:value={calculation.day} type="number"> 日
-            <input bind:value={calculation.hour} max="24" min="0" type="number"> 时
+            <input min="0" bind:value={calculation.year} type="number"> 年
+            <input min="0" max="12" bind:value={calculation.month} type="number"> 月
+            <input min="0" max="31" bind:value={calculation.day} type="number"> 日
+            <input min="0" max="24" bind:value={calculation.hour}  type="number"> 时
         </p>
         <p>
             <select on:change={handleChange}>
