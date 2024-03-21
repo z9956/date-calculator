@@ -139,7 +139,7 @@
                     <option value={option.value} selected={option?.selected}>{option.label}</option>
                 {/each}
             </select>
-            <input bind:value={num} type="number">
+            <input min="0" bind:value={num} type="number">
             <select bind:value={unit} on:change={handleChangeUnit}>
                 {#each unitOptions as option}
                     <option value={option.value}>{option.label}</option>
