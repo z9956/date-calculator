@@ -1,11 +1,15 @@
 <script>
     import DateCalculator from "./DateCalculator.svelte";
     import DateReminder from "./DateReminder.svelte";
+    import Map from "./Map.svelte";
 </script>
 
-<main class="wrap">
-    <DateCalculator/>
-    <DateReminder/>
+<main >
+    <Map/>
+    <div class="wrap">
+        <DateCalculator/>
+        <DateReminder/>
+    </div>
 </main>
 
 <style>
