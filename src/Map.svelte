@@ -1,18 +1,22 @@
 <script>
-    const maps = ["残月", "风暴点", "世界尽头"];
+    const maps = ["电气区", "风暴点", "世界尽头"];
 
-    function getCurrentMap() {
+    function getMap() {
         const today = new Date();
         const index = today.getDate() % maps.length;
-        return maps[index];
+        return { currentMap: maps[index],
+            tomorrowMap: maps[(index + 1) % maps.length],
+            dayAfterTomorrowMap: maps[(index + 2) % maps.length], };
     }
 
-    const currentMap = getCurrentMap();
+    const {currentMap, tomorrowMap, dayAfterTomorrowMap} = getMap();
 </script>
 
 <main>
     <div class="map-container">
-        今天的地图是：<span>{currentMap}</span>
+        今天：<span>{currentMap}</span> |
+        明天：<span>{tomorrowMap}</span> |
+        后天：<span>{dayAfterTomorrowMap}</span>
     </div>
 </main>
 
