@@ -1,5 +1,5 @@
 <script>
-    const maps = ["电气区", "风暴点", "世界尽头"];
+    const maps = [ "风暴点", "奥林匹斯", "电力区",];
 
     function getMap() {
         const today = new Date();
