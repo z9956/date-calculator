@@ -1,6 +1,8 @@
 <script>
     import dayjs from 'dayjs';
 
+    import { toFixed } from "./utils.js";
+
     const todayDate = dayjs();
     const preDate = {
         year: todayDate.year(),
@@ -16,12 +18,6 @@
     }
 
     let diffResult = null;
-
-    const toFixed = (num) => {
-        if (Number.isInteger(num)) return num;
-
-        return num.toFixed(1);
-    }
 
     const handleDiff = () => {
         const date = dayjs(`${lastDate.year}-${lastDate.month}-${lastDate.day}`);

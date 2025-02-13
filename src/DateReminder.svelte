@@ -1,7 +1,9 @@
 <script>
     import { onMount } from 'svelte';
-
     import { Lunar, Solar } from 'lunar-javascript';
+
+    import { toFixed } from "./utils.js";
+    import dayjs from "dayjs";
 
     const date = new Date();
     let toSolar = true;
@@ -59,6 +61,7 @@
 
     onMount(() => {
         const now = date.getTime();
+        const dayJsDate = dayjs();
 
         reminderDate = reminderDate.map(current => {
             const { month, day } = current;
@@ -69,6 +72,8 @@
             current.solar = solar.toString();
             current.lunar = lunar;
             current.expire = now > new Date(current.solar).getTime();
+
+            current.diffDay = toFixed(dayjs(current.solar).diff(dayJsDate, 'day', true))
             return current
         })
     })
@@ -81,7 +86,7 @@
             {#if (reminder.expire)}
                 <p><del>农历 {reminder.lunar ?? ''} -> 阳历 {reminder.solar ?? ''}</del></p>
                 {:else}
-                <p>农历 {reminder.lunar ?? ''} -> 阳历 {reminder.solar ?? ''}</p>
+                <p>农历 {reminder.lunar ?? ''} -> 阳历 {reminder.solar ?? ''} |  <span> 还有 {reminder?.diffDay ?? 0} 天</span></p>
 
             {/if}
         {/each}
