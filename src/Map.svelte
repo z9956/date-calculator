@@ -1,4 +1,5 @@
 <script>
+    // const maps = ["世界尽头", "电力区", "奥林匹斯","诸王峡谷","风暴点"];
     const maps = ["诸王峡谷","奥林匹斯","风暴点"];
 
     function getMap() {
