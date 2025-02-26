@@ -69,7 +69,7 @@
         font-size: 20px;
         font-weight: bold;
         margin: 20px;
-        padding: 30px 10px;
+        padding: 15px 10px;
         background-color: #f0f0f0;
         border: 1px solid #ccc;
         border-radius: 8px;
