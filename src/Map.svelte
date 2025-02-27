@@ -1,5 +1,12 @@
 <script>
+    import dayjs from "dayjs";
+
     // const maps = ["世界尽头", "电力区", "奥林匹斯","诸王峡谷","风暴点"];
+
+    const getSeasonEndTime = () => {
+        return dayjs('2025-05-06').diff(new Date(), 'days');
+    }
+
     const maps = ["诸王峡谷","奥林匹斯","风暴点"];
 
     function getMap() {
@@ -42,6 +49,7 @@
 
     const sevenDays = getMap();
     const progressPercentage = getProgress();
+    const seasonEndTime = getSeasonEndTime();
 </script>
 
 <main>
@@ -49,6 +57,7 @@
         <div class="progress-bar">
             <div class="progress" title="{Math.round(progressPercentage)}%" style="width: {progressPercentage}%"></div>
         </div>
+        <span class="day-item">赛季结束 {seasonEndTime}天</span>
         {#each sevenDays as day}
             <span class="day-item">
                 {day.label}：<span class="map-name">{day.map}</span>
@@ -62,7 +71,7 @@
         font-size: 20px;
         font-weight: bold;
         margin: 20px;
-        padding: 15px 10px;
+        padding: 12px 8px;
         background-color: #f0f0f0;
         border: 1px solid #ccc;
         border-radius: 8px;
@@ -87,14 +96,14 @@
 
     .day-item {
         display: inline-block;
-        margin: 0 8px;
+        margin: 0 6px;
         position: relative;
         z-index: 1;
     }
 
     .day-item:not(:last-child)::after {
         content: "|";
-        margin-left: 12px;
+        margin-left: 10px;
         color: #666;
         opacity: 0.7;
     }
