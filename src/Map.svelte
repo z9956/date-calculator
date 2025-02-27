@@ -4,16 +4,8 @@
 
     function getMap() {
         const today = new Date();
-        // 计算当年第几天
-        const year = today.getFullYear();
-        const startOfYear = new Date(year, 0, 0);
-        const diff = today - startOfYear;
-        const oneDay = 1000 * 60 * 60 * 24;
-        const dayOfYear = Math.floor(diff / oneDay);
+        const index = today.getDate() % maps.length;
 
-        const index = dayOfYear % maps.length;
-
-        // 生成未来7天的数据
         const sevenDays = [];
         for (let i = 0; i < 7; i++) {
             const date = new Date(today);
@@ -25,7 +17,7 @@
             });
         }
 
-        return { sevenDays };
+        return sevenDays;
     }
 
     function formatDayLabel(date, offset) {
@@ -48,7 +40,7 @@
         return (dayOfYear / daysInYear) * 100;
     }
 
-    const { sevenDays } = getMap();
+    const sevenDays = getMap();
     const progressPercentage = getProgress();
 </script>
 
