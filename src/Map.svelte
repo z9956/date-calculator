@@ -3,24 +3,29 @@
 
     // const maps = ["世界尽头", "电力区", "奥林匹斯","诸王峡谷","风暴点"];
 
+    const config = {
+        anchorDate: dayjs('2025-03-01'),
+        offset: 2
+    }
+
     const getSeasonEndTime = () => {
-        return dayjs('2025-05-06').diff(new Date(), 'days');
+        return dayjs('2025-05-07').diff(new Date(), 'days');
     }
 
     const maps = ["诸王峡谷","奥林匹斯","风暴点"];
 
     function getMap() {
-        const today = new Date();
-        const index = today.getDate() % maps.length;
+        const today = dayjs();
+        const daysDiff = today.diff(config.anchorDate, 'day');
+        const startIndex = (daysDiff + config.offset) % maps.length;
 
         const sevenDays = [];
         for (let i = 0; i < 7; i++) {
-            const date = new Date(today);
-            date.setDate(date.getDate() + i);
+            const date = today.add(i, 'day').toDate();
 
             sevenDays.push({
                 label: formatDayLabel(date, i),
-                map: maps[(index + i) % maps.length]
+                map: maps[(startIndex + i) % maps.length]
             });
         }
 
