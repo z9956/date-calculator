@@ -4,7 +4,7 @@
     // const maps = ["世界尽头", "电力区", "奥林匹斯","诸王峡谷","风暴点"];
 
     const config = {
-        anchorDate: dayjs('2025-03-01'),
+        anchorDate: dayjs('2025-03-28'),
         offset: 2
     }
 
@@ -12,7 +12,7 @@
         return dayjs('2025-05-07').diff(new Date(), 'days');
     }
 
-    const maps = ["诸王峡谷","奥林匹斯","风暴点"];
+    const maps = ["风暴点", "诸王峡谷","电力区域",];
 
     function getMap() {
         const today = dayjs();
