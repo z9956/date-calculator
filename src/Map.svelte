@@ -4,15 +4,15 @@
     // const maps = ["世界尽头", "电力区", "奥林匹斯","诸王峡谷","风暴点"];
 
     const config = {
-        anchorDate: dayjs('2025-03-28'),
-        offset: 2
+        anchorDate: dayjs('2025-04-02'),
+        offset: 0
     }
 
     const getSeasonEndTime = () => {
         return dayjs('2025-05-07').diff(new Date(), 'days');
     }
 
-    const maps = ["风暴点", "诸王峡谷","电力区域",];
+    const maps = ["风暴点", "电力区域", "诸王峡谷"];
 
     function getMap() {
         const today = dayjs();
